@@ -1,0 +1,43 @@
+# --- Project-Specific Files ---
+
+# Ignore the entire checkpoints folder
+# Rationale: Model weights are large binary files, not source code.
+checkpoints/
+
+# Ignore large data files, but not the Python scripts in the data/ folder.
+# Rationale: Datasets can be very large and should be downloaded by the user, not stored in Git.
+data/*.bin
+data/*.txt
+data/*.json
+
+# --- Python and Environment ---
+
+# Ignore Python bytecode and cache
+__pycache__/
+*.pyc
+
+# Ignore virtual environments
+# Common names for virtual environments are venv, env, .venv, etc.
+# If you created your conda env inside the project, add its name here.
+# e.g., babymoe/
+venv/
+.venv/
+env/
+.env
+
+# --- Logging and IDEs ---
+
+# Ignore Weights & Biases local logs
+wandb/
+
+# Ignore IDE-specific settings
+.vscode/
+.idea/
+
+# --- Operating System Files ---
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
