@@ -56,20 +56,18 @@ V1.0 features:
 
 ```
 BabyMoE/
+├── assets/
+│   └── babymoe_rd.png.py               
 ├── config/
 │   └── config.py               # Model & training hyperparameters
 ├── data/
-│   ├── prepare_data.py         # Download & tokenize dataset
-│   ├── input.txt               # Raw text (TinyShakespeare)
-│   ├── train.bin               # Tokenized train split
-│   └── val.bin                 # Tokenized validation split
+│   ├── prepare_alpaca.py       # Download & tokenize for finetuning
+│   └── prepare_data.py         # Download & tokenize dataset
 ├── src/
-│   ├── model.py                # GPT-like MoE transformer architecture
-│   ├── trainer.py              # Core training loop logic
-│   ├── generate.py             # Basic sampling / generation script
-│   └── dataset.py              # PyTorch Dataset + DataLoader
+│   └── model.py                # GPT-like MoE transformer architecture
 ├── checkpoints/                # Saved model weights (.pt files)
 ├── train.py                    # Pre-training (next-token prediction)
+├── generate.py                 # Simple testing for next word predictioon
 ├── finetune.py                 # Supervised fine-tuning (instruction following)
 ├── chat.py                     # Simple interactive chat interface
 ├── requirements.txt            # Dependencies
