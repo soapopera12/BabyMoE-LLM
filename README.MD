@@ -1,5 +1,9 @@
 # BabyMoE-LLM
 
+<p align="center">
+  <img src="./assets/babymoe_rd.png" alt="Logo" width="1100" height="300">
+</p>
+
 **BabyMoE** is a **small, from-scratch Mixture of Experts (MoE) language model** implemented in pure PyTorch — created **exclusively for learning and experimentation**.
 
 ### Goals of this repository
