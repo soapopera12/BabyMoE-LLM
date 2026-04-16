@@ -10,7 +10,8 @@
 
 - Understand and implement modern LLM building blocks from first principles
 - Run meaningful training and inference on consumer-grade hardware  
-  → single RTX 3050 (4–6 GB VRAM) + 16 GB system RAM on Windows
+  → single RTX 3050 (6 GB VRAM) + 16 GB system RAM on Windows
+  → double Quadro RTX 4000 (8 GB VRAM) + 64 GB system RAM on Linux (using ddp)
 - Progressively add and compare recent architectural & training techniques
 - Keep the codebase minimal, readable, well-commented and easy to step through
 
@@ -100,7 +101,11 @@ conda activate babymoe
 pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 
 # Install remaining dependencies
-pip install tiktoken requests tqdm numpy wandb
+pip install tiktoken requests tqdm numpy
+
+# Install and setup wandb 
+pip install wandb weave
+wandb login
 ```
 
 Later you may also want:
@@ -109,10 +114,14 @@ Later you may also want:
 pip install matplotlib pandas    # optional: for analysis
 ```
 
-### 2. Prepare Data (TinyShakespeare)
+### 2. Prepare Data for pre-training (Next token prediction)
 
 ```bash
-python data/prepare_data.py
+## for tiny shakesphere
+python data/prepare_shakespeare.py
+
+## for Open web text data
+python data/prepare_owt.py
 ```
 
 Creates `data/train.bin` and `data/val.bin`
@@ -129,8 +138,11 @@ Creates `data/train.bin` and `data/val.bin`
 Example usage:
 
 ```bash
-# 1. Pre-train
+# 1. Pre-train without ddp mode
 python train.py
+
+# 4. Pre-train with ddp mode (multi-GPU)
+torchrun --nproc_per_node=2 train.py
 
 # 2. After pre-training finishes (or from a checkpoint)
 python finetune.py
@@ -149,7 +161,6 @@ python chat.py
 
 ## Planned Improvements / Roadmap
 
-- Switch to OpenWebText / FineWeb / The Pile subset
 - Implement learning rate scheduler (cosine with warmup)
 - Add evaluation (perplexity, zero-shot tasks)
 - Experiment with different #experts, top-k values
@@ -165,4 +176,3 @@ Inspired by:
 - Mixtral of Experts paper & open implementations
 - Hugging Face Transformers (architecture reference)
 
-Happy hacking! 🚀
